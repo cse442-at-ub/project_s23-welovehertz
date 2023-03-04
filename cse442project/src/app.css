@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    padding: 0;
+ }
+
+ hr {
+    width: 95%;
+    border-top: 2px solid #100101;
+    opacity: 18%;
+
+ }

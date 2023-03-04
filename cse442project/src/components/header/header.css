@@ -1,0 +1,38 @@
+.header-img {
+    width: 28rem;
+    height: 20rem;
+    padding-right: 10px;
+}
+
+.header-img-one {
+    margin-left: 40px;
+}
+
+.header-title {
+    margin-left: 30px;
+    margin-bottom: 5px;
+}
+
+.header-description {
+    margin-bottom: 20px;
+    margin-left: 40px;
+}
+
+.header-rating-img {
+    margin-right: 8px;
+}
+
+.header-rating {
+    margin-right: 30px;
+}
+
+.header-price-title {
+    display: inline-block;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.header-price {
+    display: inline-block;
+    color: #8A8A8A;
+}

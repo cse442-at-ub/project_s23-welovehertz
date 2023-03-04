@@ -1,0 +1,33 @@
+
+
+.navbar {
+    background-color: #5386FC;
+    display: flex;
+    align-items: center;
+}
+
+
+.nav-logo {
+    padding: 10px 20px 10px 25px;
+    width: 3rem;
+}
+
+.nav-title {
+    font-size: 29px;
+    color: white;
+}
+
+.nav-search {
+    text-indent: 10px;
+}
+
+.nav-darkMode {
+    align-items: right;
+    width: 2.5rem;
+    float: right;
+}
+
+.nav-profile {
+    width: 2.1rem;
+    float: right;
+}
