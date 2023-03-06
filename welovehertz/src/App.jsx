@@ -1,73 +1,62 @@
-import logo from './logo.svg';
+
+import React from 'react';
 import './App.css';
-import React from "react";
-import Landing from './Componet/landing';
 
+function App() {
+    return (
+        <div>
+            <nav class="navbar background">
+                <ul class="nav-list">
+                    <li><a href="#ResidentialPage">Residential Page</a></li>
+                    <li><a href="#RegisterPage">Registration Page</a></li>
+                    <li><a href="#Login">Login</a></li>
+                    <li><a href='#Logout'>Logout</a></li>
+                </ul>
 
+                <div class="rightNav">
+                    <input type="text" name="search" id="search" />
+                    <button class="btn btn-sm">Search</button>
+                </div>
+            </nav>
 
-import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
-class App extends React.Component { 
-  constructor(props){
-    super(props);
-    this.state ={
-      refreshPost: false, 
-      login: false,
-      logout: false,
-      refreshHousing: false,
-    }; 
-  
-    //this.mainContent = React.createRef();
-    this.doRefreshPost = this.doRefreshPost.bind(this);
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-    this.doRefreshHousing = this.logout.bind(this);
+            <section class="section">
+                <div class="box-main">
+                    <div class="firstHalf">
+                        <h1 class="text-big">
+                            Welcome to Univeristy at Buffalo Housing 
+                            Rating
+                        </h1>
+                      
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="box-main">
 
+                    <div class="secondHalf">
+                        <h1 class="text-big" id="program">
+                        <button > Fill IN </button>
+                        </h1>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <div class="box-main">
+                    <div class="secondHalf">
+                        <h1 class="text-big" id="program">
+                            <button> FILL IN </button> 
+                        </h1>
+                    </div>
+                </div>
+            </section>
+           
+            <footer className="footer">
+                <p className="text-footer">
+                    UB Campus Housing Rating
+                </p>
+            </footer>
+        </div>
+    )
+}
+export default App
 
-    homepage = () =>  { 
-      this.setState({
-        refreshPost: true,
-        refreshHousing: true,
-      });
-    };
-
-    login = () => { 
-      this.setState({
-      });
-    };
-    logout =()=> {
-      this.setState({
-
-      });
-    };;
-    render ();{
-      <Router basename={process.env.PUBLIC_URL}>
-      <div className="App">
-        <header className="App-header">
-          <div className="maincontent" id="mainContent">
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route
-                path="/posts"
-                element={
-                  <Posts
-                    doRefreshPost={this.doRefreshPosts}
-                    doRefreshHousing={this.doRefreshHousing}
-                    login={this.login}
-                    apprefresh={this.state.refreshPosts}
-                    housingRefresh={this.state.refreshHousing}
-                  />
-                }
-              />
-            </Routes>
-          </div>
-        </header>
-        <Modal show={this.state.openModal} onClose={(e) => toggleModal(this, e)}>
-          This is a modal dialog!
-        </Modal>
-      </div>
-    </Router>
-    };
-  }
-};
-
-export default App; 

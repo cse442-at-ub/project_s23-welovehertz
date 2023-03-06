@@ -1,42 +1,29 @@
-import "./styles/landing.css";
+// import React from "react";
 
-//Router
-import { useNavigate } from "react-router-dom";
+// // import ReactDOM from "react-dom/client";
+// import { Outlet, Link } from "react-router-dom";
 
-const Landing = () => {
-  let navigate = useNavigate();
-  return (
-    <div id="landing">
-      <h1>Welcome to Rating UB Housing Page</h1>
-      <hr />
-      <div id="homePage">
-        <button
-          className="button"
-          onClick={(e) => {
-            navigate("/login");
-          }}
-        >
-          Login
-        </button>
-        <button
-          className="button"
-          onClick={(e) => {
-            navigate("/RegistrationPage");
-          }}
-        >
-          Registration Page
-        </button>
-        <button
-          className="button"
-          onClick={(e) => {
-            navigate("/ResidentialPage");
-          }}
-        >
-          Residential Page
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default Landing;
+// const Landing= () => {
+//   return (
+//     <>
+//       <nav>
+//         <ul>
+//           <li>
+//             <Link to="/">Home</Link>
+//           </li>
+//           <li>
+//             <Link to="/Registration">Registration Page</Link>
+//           </li>
+//           <li>
+//             <Link to="/Residential">Residetial Page</Link>
+//           </li>
+//           <li>
+//             <Link to="/login-logout">Login/Logout</Link>
+//           </li>
+//         </ul>
+//       </nav>
+//       <Outlet />
+//     </>
+//   )
+// };
+// export default Landing;
