@@ -1,0 +1,32 @@
+.login {
+    font-size: 30px;
+    margin: 20% 30% 20% 30%;
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border: 2px solid #8A8A8A;
+    border-radius: 50px;
+
+    /*font*/
+
+    font-family: 'Manrope';
+    font-style: normal;
+    font-size: 50px;
+    text-align: center;
+    color: #000000;
+}
+
+li {
+    list-style-type: none ;
+    display: inline-block;
+    text-align: right;
+}
+
+input[type=text],
+input[type=password] {
+    width: 140%;
+
+    border:none;
+    border-bottom: 1px solid black;
+    outline: none;
+}
