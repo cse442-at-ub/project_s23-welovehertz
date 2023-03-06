@@ -30,3 +30,26 @@ input[type=password] {
     border-bottom: 1px solid black;
     outline: none;
 }
+
+Button {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 6%;
+    height: 45px;
+
+    background: #5386FC;
+    border: 3px solid #5386FC;
+    border-radius: 50px;
+
+    color: white;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+Button:hover {
+    cursor: pointer;
+    background-color: #2564f8;
+    border: 3px solid #2564f8;
+}

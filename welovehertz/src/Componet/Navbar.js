@@ -12,9 +12,10 @@ export default function Navbar(){
             </div>
             <div className="login">
                 <ul>
-                    <li>Login</li>
+                    Login
                     <input type="text" placeholder="Email" name="email" required></input>
                     <input type="password" placeholder="Password" name="password" required></input>
+                    <button>LOGIN</button>
                 </ul>
             </div>
         </>
