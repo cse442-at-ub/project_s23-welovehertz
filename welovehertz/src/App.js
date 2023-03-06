@@ -3,7 +3,7 @@ import React from "react";
 
 
 function clickMe() {
-  alert('Account Created!');
+  alert('BOOM!');
 }
 function Nav() {
   return (
