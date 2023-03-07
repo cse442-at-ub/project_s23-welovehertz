@@ -1,0 +1,24 @@
+.amenities-title {
+    padding-left: 40px;
+    font-size: 40px;
+    display: block;
+}
+
+
+.amenities-column {
+    float: left;
+    width: 33.33%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  
+.amenities-icon {
+    padding-left: 50px;
+}
+
+.amenities-type {
+    padding-left: 20px;
+    color: #8A8A8A;
+    font-size: 17.5px;
+}

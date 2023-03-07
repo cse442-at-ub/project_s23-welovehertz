@@ -3,7 +3,7 @@ import ratingStarImg from "./images/header-rating-star.png";
 import slideshowOne from "./images/header-slideshow-image1.png"
 import slideshowTwo from "./images/header-slideshow-image2.png"
 import slideshowThree from "./images/header-slideshow-image3.png"
-import "../header/header.css"
+import "./header.css"
 
 export default function Header() {
     return (
