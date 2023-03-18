@@ -51,7 +51,7 @@ export default function Register () {
                         <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" placeholder="Password" name="password" required/>
                         <label for="password">Confirm Password</label>
                         <input value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} type="password" placeholder="Confirm Password" name="password" required/>
-                        <button>Register</button>
+                        <button><Link to="https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/login">Register</Link></button>
                         {error && <div>{error}</div>}
                         {success && <div>Account Creation Success!</div>}
                     </form>
