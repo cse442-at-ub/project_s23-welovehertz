@@ -22,9 +22,8 @@ switch($method) {
       }else {
         $response = ['status' => 0, 'message' => 'Record Failed to Create'];
       }
-      break;
       echo json_encode($response);
-
+      break;
 }
 
 
