@@ -1,6 +1,6 @@
 {
   "name": "test-stuff",
-  "homepage": "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h",
+  "homepage": "/CSE442-542/2023-Spring/cse-442h/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
