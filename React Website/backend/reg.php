@@ -17,7 +17,6 @@ switch ($method) {
     $count = $stmt->fetchColumn();
     // Validate input fields
     $errors = [];
-
     if ($count > 0) {
       $errors['email'] = 'Email address already exists';
     }
