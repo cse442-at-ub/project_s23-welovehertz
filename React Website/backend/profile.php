@@ -15,5 +15,5 @@ switch ($method) {
         $data = $param->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($data);
         break;
-}na
+}
 ?>;

@@ -7,23 +7,53 @@ $db = new DbConn;
 $conn = $db->connect();
 
 $method = $_SERVER['REQUEST_METHOD'];
-switch($method) {
-    case "POST":
-      $user = json_decode(file_get_contents('php://input'));
-      $hashed_pass = password_hash($user->password,PASSWORD_DEFAULT);
+switch ($method) {
+  case "POST":
+    $user = json_decode(file_get_contents('php://input'));
+    $sql = "SELECT COUNT(*) FROM users WHERE email = :email";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':email', $user->email);
+    $stmt->execute();
+    $count = $stmt->fetchColumn();
+    // Validate input fields
+    $errors = [];
+    if ($count > 0) {
+      $errors['email'] = 'Email address already exists';
+    }
+    if (!preg_match('/^[a-zA-Z ]+$/', $user->first_name)) {
+      $errors['first_name'] = 'First name should only contain letters and spaces';
+    }
+    if (!preg_match('/^[a-zA-Z ]+$/', $user->last_name)) {
+      $errors['last_name'] = 'Last name should only contain letters and spaces';
+    }
+    if (!filter_var($user->email, FILTER_VALIDATE_EMAIL)) {
+      $errors['email'] = 'Invalid email address';
+    }
+    if (strlen($user->password) < 8) {
+      $errors['password'] = 'Password should be at least 8 characters long';
+    }
+    if ($user->password !== $user->confirmPassword) {
+      $errors['confirm_password'] = 'Passwords do not match';
+    }
+    if (count($errors) > 0) {
+      $response = ['status' => 0, 'message' => 'Input validation failed', 'errors' => $errors];
+      echo json_encode($response);
+      exit();
+    } else {
       $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (:first, :last, :email, :password)";
       $param = $conn->prepare($sql);
       $param->bindParam(':first', $user->first_name);
       $param->bindParam(':last', $user->last_name);
       $param->bindParam(':email', $user->email);
-      $param->bindParam(':password', $hashed_pass);
-      if($param->execute()) {
+      $param->bindParam(':password', password_hash($user->password, PASSWORD_DEFAULT));
+      if ($param->execute()) {
         $response = ['status' => 1, 'message' => 'Record Created'];
-      }else {
+      } else {
         $response = ['status' => 0, 'message' => 'Record Failed to Create'];
       }
       echo json_encode($response);
       break;
+    }
 }
 
 ?>;

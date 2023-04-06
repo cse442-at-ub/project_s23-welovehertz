@@ -17,14 +17,14 @@ function getUser($con, $email, $password) {
         $hashedPW = $result[0]['password'];
         // echo $hashedPW . "\n";
         if (password_verify($password, $hashedPW)) {
-	    echo "Account Verified" . "\n";
+            echo "Account Verified" . "\n";
             return 1;
         } else {
-	    echo "Wrong Password" . "\n";
+            echo "Wrong Password" . "\n";
             return 0;
         }
     } else {
-	echo "No Account With That Email" . "\n";
+        echo "No Account With That Email" . "\n";
         return 0;
     }
 }
