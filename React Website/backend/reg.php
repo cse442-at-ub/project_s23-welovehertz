@@ -29,24 +29,23 @@ switch ($method) {
     if (!filter_var($user->email, FILTER_VALIDATE_EMAIL)) {
       $errors['email'] = 'Invalid email address';
     }
-    if ($user->password !== $user->confirm_password) {
-      $errors['confirm_password'][] = 'Passwords do not match';
-    }
     if (strlen($user->password) < 8) {
-      $errors['password'][] = 'Password should be at least 8 characters long';
+      $errors['password'] = 'Password should be at least 8 characters long';
+    }
+    if ($user->password !== $user->confirmPassword) {
+      $errors['confirm_password'] = 'Passwords do not match';
     }
     if (count($errors) > 0) {
       $response = ['status' => 0, 'message' => 'Input validation failed', 'errors' => $errors];
       echo json_encode($response);
       exit();
     } else {
-      $sql = "INSERT INTO users (first_name, last_name, email, password, favorite_list) VALUES (:first, :last, :email, :password, 1)";
+      $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (:first, :last, :email, :password)";
       $param = $conn->prepare($sql);
       $param->bindParam(':first', $user->first_name);
       $param->bindParam(':last', $user->last_name);
       $param->bindParam(':email', $user->email);
-      $hashed_password = password_hash($user->password, PASSWORD_DEFAULT);
-      $param->bindParam(':password', $hashed_password);
+      $param->bindParam(':password', password_hash($user->password, PASSWORD_DEFAULT));
       if ($param->execute()) {
         $response = ['status' => 1, 'message' => 'Record Created'];
       } else {
