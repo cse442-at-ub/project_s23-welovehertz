@@ -1,9 +1,12 @@
 .profile {
     text-align: center;
+    background: linear-gradient(45deg,rgb(168, 211, 225), rgb(166, 214, 214), rgb(189, 229, 242));
 }
 
 .profile-header {
     font-size: 45px;
+    margin-top: 0;
+    padding-top: 20px;
 }
 
 .profile-pfp {
@@ -39,4 +42,24 @@
 
 .profile-profile-title {
     font-size: 40px;
+}
+
+.profile-input {
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin: 0.5rem 0;
+    margin-left: 40px;
+
+}
+
+.profile-cp-button {
+    margin-top: 15px;
+    border: none;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 20px;
 }

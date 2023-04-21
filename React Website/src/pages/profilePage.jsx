@@ -10,6 +10,8 @@ export default function ProfilePage () {
     const [lastName, setLastName] = useState('ERROR');
     const [email, setEmail] = useState('ERROR');
     const [favoriteList, setFavoriteList] = useState([]);
+    const [newPassword, setNewPassword] = useState('');
+    const [isValidPassword, setIsValidPassword] = useState(false);
 
     useEffect(() => {
         let cookie = document.cookie
@@ -39,8 +41,28 @@ export default function ProfilePage () {
     const navigate = useNavigate();
 
     const handleListingClick = (id) => {
-        console.log(id);
         navigate(`/CSE442-542/2023-Spring/cse-442h/${id}`)
+    }
+
+    const changePassword = () => {
+        let cookie = document.cookie
+        let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
+        if (!(parsedCookie.indexOf(";") == -1)) {
+            parsedCookie = parsedCookie.substring(0, parsedCookie.indexOf(";"))
+        }
+        Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/changePassword.php', {
+            newPassword: newPassword,
+            id: parsedCookie, 
+        })
+        .then(function (response) {
+            const res = response.data.substring(2, response.data.length - 1)
+            if (res == "Password should be at least 8 characters long") {
+                setIsValidPassword(true)
+            } else {
+                setIsValidPassword(false)
+                console.log("Password has been changed")
+            }
+        })
     }
 
     return (
@@ -61,6 +83,13 @@ export default function ProfilePage () {
                         <h4 className="profile-titles">Email:</h4>
                         <span className="profile-text">{email}</span>
                     </div>
+                    <div className="profile-container-3">
+                        <h4 className="profile-titles">Change Password:</h4>
+                        <input className="profile-input"  value={newPassword} onChange={(event) => setNewPassword(event.target.value)} type="password" placeholder="Change password" name="password" />
+                        <button className="profile-cp-button" onClick={() => changePassword()}>Update password</button>
+                    </div>
+                    {isValidPassword && <div className="error-message">Password should be at least 8 characters long</div>}
+
                 </div>
             </div>
             <h2 className="profile-profile-title">Favorite Listing</h2>
