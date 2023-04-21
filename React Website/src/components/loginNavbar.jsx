@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
 import "../styles/loginNavbar.css";
 import HomeLogo from '../pictures/home_logo.jpg'
@@ -7,12 +7,29 @@ import ReorderIcon from '@mui/icons-material/Reorder';
 import SearchBar from "./searchbar";
 import HousingData from "../Data.json"
 import { Button } from "@mui/material";
-import profileIcon from "../pictures/profile-icon.png"
+import Axios from "axios"
+import Profile from "../pages/profilePage"
 
 export default function Navbar(){
 
     const [openLinks, setOpenLinks] = useState(false);
+    const [pfp, setPfp] = useState();
 
+    useEffect(() => {
+        let cookie = document.cookie
+        let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
+        if (!(parsedCookie.indexOf(";") == -1)) {
+            parsedCookie = parsedCookie.substring(0, parsedCookie.indexOf(";"))
+        }
+        Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/navbar.php', {
+            id: parsedCookie,
+        })          
+        .then(response => {
+            const parsedPFP = JSON.parse(response.data.substring(2, response.data.length-1))
+            setPfp(parsedPFP)
+        })     
+    })
+    
     const toggleNavbar = () => {
         setOpenLinks(!openLinks)
     };
@@ -27,7 +44,7 @@ export default function Navbar(){
                         <Link to="/CSE442-542/2023-Spring/cse-442h/">Home</Link>
                         <Link to="/CSE442-542/2023-Spring/cse-442h/contact-us">Contact Us</Link>
                         <Link to="/CSE442-542/2023-Spring/cse-442h/profile">
-                            <img className="profile-image" src={profileIcon} />
+                            <img className="profile-image" src={pfp} />
                         </Link>
                     </div>
                     <SearchBar placeholder="Enter Housing Option" data ={HousingData}/> 
@@ -37,7 +54,7 @@ export default function Navbar(){
                         <span className="logout">Logout</span>
                         <Link to="/CSE442-542/2023-Spring/cse-442h/contact-us">Contact Us</Link>
                         <Link to="/CSE442-542/2023-Spring/cse-442h/profile">
-                            <img className="profile-image" src={profileIcon} />
+                            <img className="profile-image" src={pfp} />
                         </Link>
                     <Button onClick={toggleNavbar}><ReorderIcon/></Button>
                 </div>

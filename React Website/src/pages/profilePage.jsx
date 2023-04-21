@@ -3,6 +3,7 @@ import pfpTemp from '../pictures/pfp.png';
 import React, {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
+import LoginNavbar from '../components/loginNavbar';
 
 //This is the User Profile Page
 export default function ProfilePage () {
@@ -84,6 +85,9 @@ export default function ProfilePage () {
             Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/uploadPFP.php', {
                 id: parsedCookie,
                 pfp: pfp,
+            })
+            .then((response) => {
+                window.location.reload();
             })
         }
     }
