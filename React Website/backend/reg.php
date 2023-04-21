@@ -41,7 +41,7 @@ switch ($method) {
       echo json_encode($response);
       exit();
     } else {
-      $sql = "INSERT INTO users (first_name, last_name, email, password, favorite_list) VALUES (:first, :last, :email, :password, 1)";
+      $sql = "INSERT INTO users (first_name, last_name, email, password, favorite_list, pfp) VALUES (:first, :last, :email, :password, 1, '')";
       $param = $conn->prepare($sql);
       $param->bindParam(':first', $user->first_name);
       $param->bindParam(':last', $user->last_name);

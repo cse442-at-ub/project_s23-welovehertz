@@ -1,5 +1,5 @@
 import '../styles/profile.css';
-import pfp from '../pictures/pfp.png';
+import pfpTemp from '../pictures/pfp.png';
 import React, {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
@@ -13,6 +13,8 @@ export default function ProfilePage () {
     const [newPassword, setNewPassword] = useState('');
     //Makes sure the password length > 8
     const [isValidPassword, setIsValidPassword] = useState(false);
+    const [pfp, setPfp] = useState();
+    const [isValidPic, setIsValidPic] = useState(false);
 
     useEffect(() => {
         let cookie = document.cookie
@@ -28,6 +30,8 @@ export default function ProfilePage () {
             setFirstName(profileData.first_name)
             setLastName(profileData.last_name)
             setEmail(profileData.email)
+            setPfp(profileData.pfp)
+            console.log(profileData.pfp)
             for (let i = 0; i < profileData.favorite_list.length; i++) {
                 if (profileData.favorite_list == "") { break; }
                 setFavoriteList(prevFavoriteList => [...prevFavoriteList, {
@@ -66,10 +70,33 @@ export default function ProfilePage () {
         })
     }
 
+    const updatePFP = () => {
+        console.log(pfp)
+        if (pfp == undefined) {
+            setIsValidPic(true)
+        } else {
+            setIsValidPic(false)
+            let cookie = document.cookie
+            let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
+            if (!(parsedCookie.indexOf(";") == -1)) {
+                parsedCookie = parsedCookie.substring(0, parsedCookie.indexOf(";"))
+            }
+            Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/uploadPFP.php', {
+                id: parsedCookie,
+                pfp: pfp,
+            })
+        }
+    }
+
     return (
         <div className='profile'>
             <h1 className="profile-header">Profile Page</h1>
             <img className="profile-pfp" src={pfp} alt="pfp" />
+            <div>
+                <input onChange={(event) => setPfp(URL.createObjectURL(event.target.files[0]))} type="file" name="image" accept=".jpg, .jpeg, .png" />
+                <button className="profile-cp-button" onClick={() => updatePFP()}>Update Profile Picture</button>
+            </div>
+            {isValidPic && <div className="error-message">You did not upload a png, jpg, or jpeg file</div>}
             <div className="profile-container-1">
                 <div className="profile-container-2">
                     <div className="profile-container-3">
