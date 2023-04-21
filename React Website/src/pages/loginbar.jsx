@@ -38,7 +38,33 @@ export default function Login (props) {
                 setError(true);
                 setSuccess(false);
         });
-    }  
+
+        //Fixed navbar bug
+        setTimeout(function(){
+            const cookie = document.cookie
+            if (cookie.includes("currentUserCookie")) {
+                props.handleLogin();
+                console.log("LOGIN SUCCESS: COOKIE")
+            } else {
+                console.log("LOGIN FAILED: NO COOKIE")
+            }
+        }, 1000);
+    }   
+    const buttonStyle = {
+        backgroundColor: 'beige',
+        border: 'none',
+        color:'white',
+        padding: '10px 20px',
+        textAlign: 'center',
+        textDecoration: 'none',
+        display: 'inline-block',
+        fontSize: '16px',
+        margin: '4px 2px',
+        cursor: 'pointer',
+        TransitionEvent: '0.3x',
+        position: "relative"
+    };
+
     return (
         <>
             <div className="login" >
