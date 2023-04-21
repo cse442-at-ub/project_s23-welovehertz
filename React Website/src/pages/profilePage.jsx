@@ -11,6 +11,7 @@ export default function ProfilePage () {
     const [email, setEmail] = useState('ERROR');
     const [favoriteList, setFavoriteList] = useState([]);
     const [newPassword, setNewPassword] = useState('');
+    //Makes sure the password length > 8
     const [isValidPassword, setIsValidPassword] = useState(false);
 
     useEffect(() => {

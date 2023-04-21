@@ -12,6 +12,7 @@ switch ($method) {
         $user = json_decode(file_get_contents('php://input'));
         $user_id = $user->id;
         $new_password = $user->newPassword;
+        //Makes sure the password length > 8d
         if (strlen($new_password) < 8) {
             echo "Password should be at least 8 characters long";
         } else {
