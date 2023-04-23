@@ -17,7 +17,6 @@ const Homepage = () => {
         })
             .then(response => {
                 const response_json = JSON.parse(response.data.substring(1));
-                console.log(response_json)
                 setListings(response_json)
             })
             .catch(error => console.error(error));

@@ -22,6 +22,7 @@ export default function Login (props) {
             password: password,
         })
             .then((response) => {
+                console.log(response)
                 if (response.status === 200 && response.data.split('\n')[1] === "Account Verified" ) {
                     setError(false)                    
                     setSuccess(true);
@@ -41,6 +42,7 @@ export default function Login (props) {
 
         //Fixed navbar bug
         setTimeout(function(){
+            console.log(document)
             const cookie = document.cookie
             if (cookie.includes("currentUserCookie")) {
                 props.handleLogin();

@@ -1,0 +1,81 @@
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 100;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.popup h3 {
+    margin-top: 0;
+}
+
+.popupForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.popupForm label {
+    font-weight: bold;
+}
+
+.popupForm select,
+.popupForm textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.popupForm button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.popupForm button:hover {
+    background-color: #0062cc;
+}
+
+.comment {
+    border: 1px solid gray;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+.comment p {
+    margin: 0;
+}
+
+.popupCloseButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.popupCancelButton {
+    margin-top: 10px;
+    background-color: #d9534f;
+}
+
+.popupCancelButton:hover {
+    background-color: #c9302c;
+}

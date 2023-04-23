@@ -7,6 +7,7 @@ import UserRatings from '../residental-components/userRatings/UserRatings'
 import {useNavigate, useParams} from 'react-router-dom'
 import ResiPrices from '../components/prices'
 import ResiAmenities from '../components/hasamenities'
+import ResiRatings from '../components/ratings'
 import '../styles/resident-page.css'
 
 
@@ -15,6 +16,7 @@ export default function ResidentPage() {
     const [location, setLocation] = useState('');
     const [prices, setPrices] = useState('');
     const [amenities, setAmenities] = useState('');
+    const [rating, setRatings] = useState('');
 
     const navigate = useNavigate();
 
@@ -28,12 +30,12 @@ export default function ResidentPage() {
             id: id
         })
         .then(function (response) {
-
             const residentialData = JSON.parse(response.data.split("[")[1].split("]")[0])
             setTitle(residentialData.residence)
             setLocation(residentialData.location)
             setPrices(ResiPrices(residentialData))
             setAmenities(ResiAmenities(residentialData))
+            setRatings(ResiRatings(residentialData))
         })
     }, []);
 
@@ -43,7 +45,7 @@ export default function ResidentPage() {
             <hr />
             <Amenities amenities={amenities}/>
             <hr />
-            <Ratings />
+            <Ratings rating={rating}/>
             <hr />
             <UserRatings />
         </div>

@@ -4,28 +4,71 @@
     display: block;
 }
 
-.ratings-column {
-    float: left;
-    width: 33.33%;
+.ratings-row {
     display: flex;
+    flex-wrap: wrap;
+}
+
+.ratings-column {
+    flex: 1 0 33.33%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 40px;
-  }
+    justify-content: center;
+}
 
 .ratings-type {
-    padding-left: 50px;
-    color: #8A8A8A;
-    font-size: 17.5px;
+    margin-bottom: 5px;
 }
+
 
 .ratings-number {
     color: #8A8A8A;
 }
 
-.ratings-progess-bar {
-    height: 7px;
-    background-color: #D9D9D9;
-    width: 120px;
-    border-radius: 25px;
-    margin: 0px 15px 0px 25px;
+.ratings-progress-bar {
+    width: 200px;
+    height: 12px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.ratings-progress-bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    background-color: #4caf50;
+    border-radius: 10px;
+    transition: width 0.5s ease-in-out;
+}
+
+.ratings-progress-bar.empty::before {
+    background-color: #ccc;
+}
+
+.ratings-progress-bar::after {
+    content: attr(data-value);
+    position: absolute;
+    top: -1.5rem;
+    right: 0;
+    font-size: 0.8rem;
+}
+
+.ratings-progress-bar__inner {
+    height: 100%;
+    border-radius: 10px;
+    background-color: #2FAFF4;
+    transition: width 0.5s ease-in-out;
+}
+
+.ratings-progress-bar.empty .ratings-progress-bar__inner {
+    background-color: #ccc;
+}
+
+.ratings-progress-bar__inner.remaining {
+    background-color: #ccc;
 }
