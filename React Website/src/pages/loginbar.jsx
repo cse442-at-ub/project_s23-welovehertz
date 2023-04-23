@@ -31,7 +31,7 @@ export default function Login (props) {
                 else{ 
                     setError(`Error: ${response.status}`);
                     setSuccess(false)
-                    setError(true)
+                    setError('∫√Email or Password was incorrect')
                 }
             })
             .catch((error) => {
@@ -39,10 +39,7 @@ export default function Login (props) {
                 setError(true);
                 setSuccess(false);
         });
-
-        //Fixed navbar bug
         setTimeout(function(){
-            console.log(document)
             const cookie = document.cookie
             if (cookie.includes("currentUserCookie")) {
                 props.handleLogin();
@@ -51,22 +48,7 @@ export default function Login (props) {
                 console.log("LOGIN FAILED: NO COOKIE")
             }
         }, 1000);
-    }   
-    const buttonStyle = {
-        backgroundColor: 'beige',
-        border: 'none',
-        color:'white',
-        padding: '10px 20px',
-        textAlign: 'center',
-        textDecoration: 'none',
-        display: 'inline-block',
-        fontSize: '16px',
-        margin: '4px 2px',
-        cursor: 'pointer',
-        TransitionEvent: '0.3x',
-        position: "relative"
-    };
-
+    }  
     return (
         <>
             <div className="login" >
@@ -77,7 +59,7 @@ export default function Login (props) {
                         <label for="password">Password</label>
                         <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" placeholder="Password" name="password" required/>
                         <button>Login</button>
-                        {success && <div>Login Success! </div>}
+                        {/* {success && <div>Login Success! </div>} */}
                         {error !== false && <div>{error}</div>}
                     </form>
                     <button className="register-button" ><Link to="/CSE442-542/2023-Spring/cse-442h/register">Don't Have An Account? Click Here</Link></button>

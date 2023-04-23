@@ -16,7 +16,7 @@ export default function Searchbar({placeholder, data} ){
         const searchHousing = event.target.value
         setWordEntered(searchHousing)
         const newFilter = data.filter((value)=> { 
-            return value.name.includes(searchHousing); 
+            return value.name.toLowerCase().includes(searchHousing.toLowerCase()); 
         });
         if (searchHousing === ""){
             setFilteredData([]);
