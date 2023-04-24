@@ -7,12 +7,12 @@ $db = new DbConn;
 $conn = $db->connect();
 
 $method = $_SERVER['REQUEST_METHOD'];
-switch ($method) {
+switch($method) {
     case "GET":
-        $sql = "SELECT * FROM Residences WHERE residence='Fargo Dorm'";
+        $sql = "SELECT * FROM Residences";
         $param = $conn->prepare($sql);
         $param->execute();
-        $resi = $param->fetchAll(PDO::FETCH_ASSOC);
+        $resi = $param->fetchAll(PDO:: FETCH_ASSOC);
         echo json_encode($resi);
         break;
     case "POST":
@@ -21,7 +21,7 @@ switch ($method) {
         $sql = "SELECT * FROM Residences WHERE id=$id";
         $param = $conn->prepare($sql);
         $param->execute();
-        $resi = $param->fetchAll(PDO::FETCH_ASSOC);
+        $resi = $param->fetchAll(PDO:: FETCH_ASSOC);
         echo json_encode($resi);
         break;
 }
