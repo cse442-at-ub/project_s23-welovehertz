@@ -64,7 +64,7 @@ export default function Header( props ) {
             <button className="header-button" onClick={() => handleSubmission(4)}>{isFavorite ? "Unfavorite" : "Favorite"}</button>
             <div className="header-description">
                 <img className="header-rating-img" src={ratingStarImg} alt=""/>
-                <span className="header-rating">4.9</span>
+                <span className="header-rating">{props.rating}</span>
                 <span>{props.location}</span>
             </div>
             <div>

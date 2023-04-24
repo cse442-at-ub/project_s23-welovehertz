@@ -8,14 +8,16 @@ $conn = $db->connect();
 
 $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
-    case "GET":
+    case "POST":
         $data = json_decode(file_get_contents('php://input'));
         $residenceComplexID = $data->id;
-        $user = $data->user;
-        $sql = "SELECT * FROM `User Ratings` WHERE id=$id";
+        $sql = "SELECT * FROM `User Ratings` WHERE `Residence Rated` = $residenceComplexID";
         $param = $conn->prepare($sql);
         $param->execute();
         $resi = $param->fetchAll(PDO:: FETCH_ASSOC);
-
+        // echo json_encode($resi);
 }
+
+
+
 ?>;
