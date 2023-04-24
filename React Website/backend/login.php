@@ -21,6 +21,7 @@ function getUser($con, $email, $password)
             //and is accessable across the whole website
             $cookie_name = 'currentUserCookie';
             //3600 is one hour
+            // Set the change from 86000 -> 3600
             setcookie($cookie_name, $result[0]['id'], time() + 3600, "/");
             echo "Account Verified" . "\n";
             return 1;
