@@ -26,6 +26,18 @@ export default function ResidentPage() {
         if (id < 1 || id > 11 || isNaN(id)){
             navigate(`/CSE442-542/2023-Spring/cse-442h/contact-us`)
         }
+<<<<<<< Updated upstream
+=======
+
+        Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/userRatings.php', {
+            id: id
+        }).then(function (response){
+            const data = JSON.parse(response.data.substring(1, response.data.length-1))
+            setComplexRating(AverageRating(data))
+            setRatings(ResiRatings(data))
+        })
+
+>>>>>>> Stashed changes
         Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/residential.php', {
             id: id
         })
@@ -35,7 +47,6 @@ export default function ResidentPage() {
             setLocation(residentialData.location)
             setPrices(ResiPrices(residentialData))
             setAmenities(ResiAmenities(residentialData))
-            setRatings(ResiRatings(residentialData))
         })
     }, []);
 

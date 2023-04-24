@@ -4,7 +4,7 @@ import "./ratings.css";
 const MAX_VALUE = 5;
 
 export default function Ratings(props) {
-  const ratings = Object.entries(props.rating).map(([type, value]) => {
+    const ratings = Object.entries(props.rating).map(([type, value]) => {
     const progressPercentage = (value / MAX_VALUE) * 100;
     const progressClass = progressPercentage === 0 ? "empty" : "";
 
