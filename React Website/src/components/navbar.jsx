@@ -19,7 +19,7 @@ export default function Navbar(){
         <>
             <div className="navbar">
                 <div className="leftSide" id={openLinks ? "open" : "close"}>
-                    <img src={HomeLogo} alt="" />
+                    <Button><Link to="/CSE442-542/2023-Spring/cse-442h/"><img src={HomeLogo} alt="" /></Link></Button>
                     <div className="hiddenLinks">
                         <Link to="/CSE442-542/2023-Spring/cse-442h/">Home</Link>
                         <Link to="/CSE442-542/2023-Spring/cse-442h/register">Register</Link>
