@@ -9,7 +9,6 @@ import ResiPrices from '../components/prices'
 import ResiAmenities from '../components/hasamenities'
 import ResiRatings from '../components/ratings'
 import '../styles/resident-page.css'
-import AverageRating from '../components/math'
 
 
 export default function ResidentPage() {
@@ -18,42 +17,27 @@ export default function ResidentPage() {
     const [prices, setPrices] = useState('');
     const [amenities, setAmenities] = useState('');
     const [rating, setRatings] = useState('');
-    const [complexRating, setComplexRating] = useState('')
 
     const navigate = useNavigate();
 
     let { id } = useParams();
 
-    // const cookie = document.cookie
-    // if (cookie.includes("currentUserCookie")) {
-      
-    // }
-    // function readCookie(n) {
-    //     var cookieName = n + "=";
-    //     var split = document.cookie.split(';');
-    //     for(var i=0;i < split.length;i++) {
-    //         var c = split[i];
-    //         while (c.charAt(0)==' ') c = c.substring(1,c.length);
-    //         if (c.indexOf(cookieName) == 0) return c.substring(cookieName.length,c.length);
-    //     }
-    //     return null;
-    // }
-    
-    // username = readCookie('currentUserCookie')
-
     useEffect(() => {
         if (id < 1 || id > 11 || isNaN(id)){
             navigate(`/CSE442-542/2023-Spring/cse-442h/contact-us`)
         }
+<<<<<<< Updated upstream
+=======
 
         Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/userRatings.php', {
             id: id
         }).then(function (response){
             const data = JSON.parse(response.data.substring(1, response.data.length-1))
-            const m = AverageRating(data)
-            setComplexRating(m)
+            setComplexRating(AverageRating(data))
+            setRatings(ResiRatings(data))
         })
 
+>>>>>>> Stashed changes
         Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/residential.php', {
             id: id
         })
@@ -63,16 +47,12 @@ export default function ResidentPage() {
             setLocation(residentialData.location)
             setPrices(ResiPrices(residentialData))
             setAmenities(ResiAmenities(residentialData))
-            setRatings(ResiRatings(residentialData))
         })
-
-
-
     }, []);
 
     return (
         <div className='container'>
-            <Header prices={prices} title={title} location={location} rating={complexRating}/>
+            <Header prices={prices} title={title} location={location}/>
             <hr />
             <Amenities amenities={amenities}/>
             <hr />

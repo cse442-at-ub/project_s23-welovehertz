@@ -31,7 +31,11 @@ export default function Login (props) {
                 else{ 
                     setError(`Error: ${response.status}`);
                     setSuccess(false)
-                    setError('∫√Email or Password was incorrect')
+<<<<<<< Updated upstream
+                    setError(true)
+=======
+                    setError('Email or Password was incorrect')
+>>>>>>> Stashed changes
                 }
             })
             .catch((error) => {
