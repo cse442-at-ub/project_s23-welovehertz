@@ -72,7 +72,6 @@ export default function ProfilePage () {
     }
 
     const updatePFP = () => {
-        console.log(pfp)
         if (pfp == undefined) {
             setIsValidPic(true)
         } else {
