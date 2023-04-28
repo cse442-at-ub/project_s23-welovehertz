@@ -1,5 +1,5 @@
 import '../styles/RegistrationPage.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -19,15 +19,27 @@ export default function Register() {
         confirm_password: '',
         submit: ''
     });
+    const [imgBlob, setImgBlob] = useState();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch(require('../pictures/emptypfp.png'))
+        .then(response => response.blob())
+        .then(blob => {
+          setImgBlob(URL.createObjectURL(blob))
+        });
+    }, [])
+
     const data = {
         first_name: first_name,
         last_name: last_name,
         email: email,
         password: password,
         confirm_password: confirm_password,
+        pfp: imgBlob,
     }
     const handleSubmission = (event) => {
+        console.log(imgBlob)
         event.preventDefault();
         console.log(data)
         Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/reg.php', data)

@@ -41,13 +41,14 @@ switch ($method) {
       echo json_encode($response);
       exit();
     } else {
-      $sql = "INSERT INTO users (first_name, last_name, email, password, favorite_list, pfp) VALUES (:first, :last, :email, :password, 1, '')";
+      $sql = "INSERT INTO users (first_name, last_name, email, password, favorite_list, pfp) VALUES (:first, :last, :email, :password, 1, :pfp)";
       $param = $conn->prepare($sql);
       $param->bindParam(':first', $user->first_name);
       $param->bindParam(':last', $user->last_name);
       $param->bindParam(':email', $user->email);
       $hashed_password = password_hash($user->password, PASSWORD_DEFAULT);
       $param->bindParam(':password', $hashed_password);
+      $param->bindParam(':pfp', $user->pfp);
       if ($param->execute()) {
         $response = ['status' => 1, 'message' => 'Record Created'];
       } else {
