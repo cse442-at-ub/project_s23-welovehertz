@@ -9,12 +9,11 @@ import Axios from "axios"
 
 export default function Header( props ) {
     const [isFavorite, setIsFavorite] = useState();
-    const [headerData, setHeaderData] = useState();
     const navigate = useNavigate();
 
     let { id } = useParams();
 
-
+    //
     useEffect(() => {
         let cookie = document.cookie
         let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
@@ -57,7 +56,7 @@ export default function Header( props ) {
         <ul key={key}>{key} : ${value.slice(0,value.length-3)+ ","+ value.slice(value.length-3)}</ul>
     )
     // console.log(price)
-
+    //fixed bug
     return (
         <div className="header">
             <h1 className="header-title">{props.title}</h1>
