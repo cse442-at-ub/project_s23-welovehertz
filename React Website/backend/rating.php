@@ -21,49 +21,54 @@ switch ($method) {
         $safetyRating = $data->safetyRating;
         $comment = $data->comment;
         $id = $data->id;
-        $pageid = $data->$pageid;
+        $pageid = $data->pageid;
 
-        // retrieve data from database
-        $sql = "SELECT Cleanliness, Price, Communication, Locationrating, Interior, Safety, NumOfRates FROM Residences WHERE id = $pageid";
-        $stmt = $conn->query($sql);
+        // Insert rating into database
+        $sql_rating = "INSERT INTO `User Rating` (User, `Residence Rated`, Cleanliness, Price, Communication, Location, Interior, Safety) VALUES ('$id', '$pageid', '$cleanlinessRating', '$priceRating', '$communicationRating', '$locationRating', '$interiorRating', '$safetyRating')";
+        $stmt_rating = $conn->query($sql_rating);
 
-        // store data in separate variables
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $cleanliness = $row['Cleanliness'];
-        $price = $row['Price'];
-        $communication = $row['Communication'];
-        $location = $row['Locationrating'];
-        $interior = $row['Interior'];
-        $safety = $row['Safety'];
-        $numofrates = $row['NumOfRates'];
+        // Insert comment into database
+        $sql_comment = "INSERT INTO `User Comment` (User, `Residence Rated`, comment) VALUES ('$id', '$pageid', '$comment')";
+        $stmt_comment = $conn->query($sql_comment);
 
-        // cal each total ratings
-        $cleanliness += $cleanlinessRating;
-        $price += $priceRating;
-        $communication += $communicationRating;
-        $location += $locationRating;
-        $interior += $interiorRating;
-        $safety += $safetyRating;
-        // cal total user rates
-        $numofrates += 1;
-
-        // Create SQL query to update the ratings data in the database
-        $sql = "UPDATE Residences SET Cleanliness=$cleanliness, Price=$price, Communication=$communication, Locationrating=$location, Interior=$interior, Safety=$safety, NumOfRates=$numofrates WHERE id=$pageid";
-        $conn->prepare($sql);
-        $output = [];
-        $output['cleanliness'] = $cleanliness / $numofrates;
-        $output['price'] = $price / $numofrates;
-        $output['communication'] = $communication / $numofrates;
-        $output['location'] = $location / $numofrates;
-        $output['interior'] = $interior / $numofrates;
-        $output['safety'] = $safety / $numofrates;
-
-        // Execute the query
-        if ($conn->query($sql) === TRUE) {
-            echo "Ratings data updated successfully!";
+        // Check if both statements were successful
+        if ($stmt_rating && $stmt_comment) {
+            // Return a success response
+            $response = array(
+                'status' => 'success',
+                'message' => 'Rating and comment added successfully'
+            );
         } else {
-            echo "Error updating ratings data: " . $conn->errorInfo();
+            // Return an error response
+            $response = array(
+                'status' => 'error',
+                'message' => 'Failed to add rating and comment'
+            );
         }
-        
-        echo json_encode($output);
+
+        // Encode the response as a JSON string
+        $json_response = json_encode($response);
+
+        // Set the content-type header to JSON
+        header('Content-Type: application/json');
+
+        // Return the JSON-encoded response
+        echo $json_response;
+        break;
+    default:
+        // Return an error response for unsupported methods
+        $response = array(
+            'status' => 'error',
+            'message' => 'Unsupported method'
+        );
+
+        // Encode the response as a JSON string
+        $json_response = json_encode($response);
+
+        // Set the content-type header to JSON
+        header('Content-Type: application/json');
+
+        // Return the JSON-encoded response
+        echo $json_response;
+        break;
 }

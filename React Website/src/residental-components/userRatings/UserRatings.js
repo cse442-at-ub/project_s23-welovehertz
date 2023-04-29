@@ -54,7 +54,7 @@ export default function UserRatings() {
             safetyRating: safetyRating,
             comment: comment,
         };
-    
+
         if (
             cleanlinessRating === 0 ||
             priceRating === 0 ||
@@ -66,22 +66,22 @@ export default function UserRatings() {
         ) {
             setShowIncompleteFormError(true);
             return;
-        }
-    
-        Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/profile.php', {
-            data, id: parsedCookie, pageid
-        })
-            .then((response) => {
-                console.log(response);
-                setShowPopup(false);
-                // do something else after submission
+        } else {
+            Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/rating.php', {
+                data, id: parsedCookie, pageid
             })
-            .catch((error) => {
-                console.log(error);
-                // handle errors
-            });
+                .then((response) => {
+                    console.log(response);
+                    setShowPopup(false);
+                    // do something else after submission
+                })
+                .catch((error) => {
+                    console.log(error);
+                    // handle errors
+                });
+        }
     };
-    
+
     return (
         <div className="userRatings">
             <div className="userRatings-row">
@@ -200,7 +200,7 @@ export default function UserRatings() {
                             <label>Comment:</label>
                             <textarea value={comment} onChange={(event) => { setComment(event.target.value); handleFormChange(); }}></textarea>
 
-            <button onClick={handlePopupSubmit}>Submit</button>
+                            <button onClick={handlePopupSubmit}>Submit</button>
                             <button className="popupCancelButton" onClick={() => setShowPopup(false)}>Cancel</button>
                             {showIncompleteFormError && <p3 >Please complete the form.</p3>}
 
