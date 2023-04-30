@@ -20,7 +20,7 @@ export default function UserRatings() {
     const [locationRating, setLocationRating] = useState(0);
     const [interiorRating, setInteriorRating] = useState(0);
     const [safetyRating, setSafetyRating] = useState(0);
-    let { pageid } = useParams();
+    let { id } = useParams();
     const handleFormChange = () => {
         if (
             cleanlinessRating !== 0 &&
@@ -39,6 +39,7 @@ export default function UserRatings() {
 
 
     const handlePopupSubmit = (event) => {
+        console.log(id)
         event.preventDefault();
         let cookie = document.cookie
         let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
@@ -68,7 +69,7 @@ export default function UserRatings() {
             return;
         } else {
             Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/rating.php', {
-                data, id: parsedCookie, pageid
+                data, userid: parsedCookie, pageid: id
             })
                 .then((response) => {
                     console.log(response);
