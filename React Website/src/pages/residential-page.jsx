@@ -49,7 +49,7 @@ export default function ResidentPage() {
             setAmenities(ResiAmenities(residentialData))
         })
     }, []);
-
+    
     return (
         <div className='container'>
             <Header prices={prices} title={title} location={location} rating={complexRating}/>
