@@ -74,8 +74,8 @@ export default function UserRatings() {
             })
                 .then((response) => {
                     setShowPopup(false);
-                    navigate('/')
-                    // do something else after submission
+                    window.location.reload();
+                    // reload page after submission
                 })
                 .catch((error) => {
                     console.log(error);
