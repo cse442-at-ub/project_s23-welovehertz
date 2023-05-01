@@ -21,22 +21,21 @@
             $comment = $data->data->comment;
             $id = $data->userid;
             $pageid = $data->pageid;
-            $sql = "SELECT * FROM `User Ratings` WHERE id = $id AND `Residence Rated` = $pageid";
+            $sql = "SELECT * FROM `User Ratings` WHERE User = $id AND `Residence Rated` = $pageid";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
-            $count = intval($stmt->fetchColumn());
-            echo $count;
-            if ($count > 0) {
-                echo "inside";
-                $x = "UPDATE `User Ratings` SET Cleanliness = ?, Price = ?, Communication = ?, Location = ?, Interior = ?, Safety = ? WHERE id = ? AND `Residence Rated` = ?";
-                $row = $result->fetch_assoc();
-                $stmt_update = $conn->prepare($x);
-                $stmt_update->bindParam("iiiiiii", $cleanlinessRating, $priceRating, $communicationRating, $locationRating, $interiorRating, $safetyRating, $id, $pageid);
-                $stmt_update->execute();
+            $row = $stmt->fetch();
+            if ($row) {
+                $sql = "UPDATE `User Ratings` SET Cleanliness = $cleanlinessRating, Price = $priceRating, Communication = $communicationRating, Location = $locationRating, Interior = $interiorRating, Safety = $safetyRating WHERE User = $id AND `Residence Rated` = $pageid";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
                 $response = array(
                     'status' => 'success',
                     'message' => 'Rating and comment updated successfully'
                 );
+                $json_response = json_encode($response);
+                echo $json_response;
+                break;
             } else {
                 // Insert rating into database
                 $sql_rating = "INSERT INTO `User Ratings` (User, `Residence Rated`, Cleanliness, Price, Communication, Location, Interior, Safety) VALUES ('$id', '$pageid', '$cleanlinessRating', '$priceRating', '$communicationRating', '$locationRating', '$interiorRating', '$safetyRating')";
