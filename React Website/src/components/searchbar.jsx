@@ -46,7 +46,7 @@ export default function Searchbar({placeholder, data} ){
                 </div> 
                 {filterData.length !== 0 && (
                 <div className="dataResults">
-                    {filterData.slice(0,11).map((value, key)=>{
+                    {filterData.slice(0,1).map((value, key)=>{
                         return(
                             <a className='dataItem' href={value.link} >
                                 <p>{value.name}</p>
