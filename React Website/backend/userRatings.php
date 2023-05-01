@@ -15,7 +15,7 @@ switch ($method) {
         $param = $conn->prepare($sql);
         $param->execute();
         $resi = $param->fetchAll(PDO:: FETCH_ASSOC);
-        // echo json_encode($resi);
+        echo json_encode($resi);
 }
 
 

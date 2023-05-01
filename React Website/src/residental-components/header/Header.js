@@ -6,6 +6,7 @@ import slideshowThree from "./images/header-slideshow-image3.png"
 import "./header.css"
 import {useParams, useNavigate} from 'react-router-dom'
 import Axios from "axios"
+import StarRating from "../../components/starrating";
 
 export default function Header( props ) {
     const [isFavorite, setIsFavorite] = useState();
@@ -55,11 +56,10 @@ export default function Header( props ) {
     const price = prices.map(([key,value]) =>
         <ul key={key}>{key} : ${value.slice(0,value.length-3)+ ","+ value.slice(value.length-3)}</ul>
     )
-    // console.log(price)
-    //fixed bug
     return (
         <div className="header">
             <h1 className="header-title">{props.title}</h1>
+            <div className="starRating"><StarRating/></div>
             <button className="header-button" onClick={() => handleSubmission(4)}>{isFavorite ? "Unfavorite" : "Favorite"}</button>
             <div className="header-description">
                 <img className="header-rating-img" src={ratingStarImg} alt=""/>
