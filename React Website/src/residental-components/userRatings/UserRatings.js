@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import pfp from "./images/UserRatings-profile-icon.png"
 import likeButton from "./images/UserRatings-like-button.png"
@@ -20,7 +20,8 @@ export default function UserRatings() {
     const [locationRating, setLocationRating] = useState(0);
     const [interiorRating, setInteriorRating] = useState(0);
     const [safetyRating, setSafetyRating] = useState(0);
-    let { pageid } = useParams();
+    const navigate = useNavigate();
+    let { id } = useParams();
     const handleFormChange = () => {
         if (
             cleanlinessRating !== 0 &&
@@ -39,6 +40,7 @@ export default function UserRatings() {
 
 
     const handlePopupSubmit = (event) => {
+        console.log(id)
         event.preventDefault();
         let cookie = document.cookie
         let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
@@ -68,11 +70,11 @@ export default function UserRatings() {
             return;
         } else {
             Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/rating.php', {
-                data, id: parsedCookie, pageid
+                data, userid: parsedCookie, pageid: id
             })
                 .then((response) => {
-                    console.log(response);
                     setShowPopup(false);
+                    navigate('/')
                     // do something else after submission
                 })
                 .catch((error) => {
@@ -138,8 +140,17 @@ export default function UserRatings() {
                         <button className="popupCloseButton" onClick={() => setShowPopup(false)}>X</button>
                         <h3>Leave a Comment and Rating</h3>
                         <div className="popupForm">
-                            <label>Cleanliness:</label>
-                            <select value={cleanlinessRating} onChange={(event) => { setCleanlinessRating(event.target.value); handleFormChange(); }}>
+                            <p><label>Cleanliness: </label>A rating of 1 means that you feel that the location of your housing unit is very inconvenient, while a rating of 5 means that you feel that the location is very convenient and desirable.</p>
+                            <select id="cleanlinessRating" value={cleanlinessRating} onChange={(event) => { setCleanlinessRating(event.target.value); handleFormChange(); }}>
+                                <option value={0}>Select rating...</option>
+                                <option value={1}>1</option>
+                                <option value={2}>2</option>
+                                <option value={3}>3</option>
+                                <option value={4}>4</option>
+                                <option value={5}>5</option>
+                            </select>
+                            <p><label>Price: </label>A rating of 1 means that you feel that you are paying too much for the quality of your housing unit, while a rating of 5 means that you feel that you are getting a great value for the price you pay.</p>
+                            <select id="priceRating" value={priceRating} onChange={(event) => { setPriceRating(event.target.value); handleFormChange(); }}>
                                 <option value={0}>Select rating...</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -148,8 +159,8 @@ export default function UserRatings() {
                                 <option value={5}>5</option>
                             </select>
 
-                            <label>Price:</label>
-                            <select value={priceRating} onChange={(event) => { setPriceRating(event.target.value); handleFormChange(); }}>
+                            <p><label>Communication: </label>A rating of 1 means that you feel that your landlord or management is very poor at communicating with you, while a rating of 5 means that you feel that they are excellent at communicating with you.</p>
+                            <select id="communicationRating" value={communicationRating} onChange={(event) => { setCommunicationRating(event.target.value); handleFormChange(); }}>
                                 <option value={0}>Select rating...</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -158,8 +169,8 @@ export default function UserRatings() {
                                 <option value={5}>5</option>
                             </select>
 
-                            <label>Communication:</label>
-                            <select value={communicationRating} onChange={(event) => { setCommunicationRating(event.target.value); handleFormChange(); }}>
+                            <p><label>Location: </label>A rating of 1 means that you feel that the location of your housing unit is very inconvenient, while a rating of 5 means that you feel that the location is very convenient and desirable.</p>
+                            <select id="locationRating" value={locationRating} onChange={(event) => { setLocationRating(event.target.value); handleFormChange(); }}>
                                 <option value={0}>Select rating...</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -168,8 +179,8 @@ export default function UserRatings() {
                                 <option value={5}>5</option>
                             </select>
 
-                            <label>Location:</label>
-                            <select value={locationRating} onChange={(event) => { setLocationRating(event.target.value); handleFormChange(); }}>
+                            <p><label>Interior: </label>A rating of 1 means that you feel that the interior of your housing unit is very poor and unappealing, while a rating of 5 means that you feel that it is very well-maintained and appealing.</p>
+                            <select id="interiorRating" value={interiorRating} onChange={(event) => { setInteriorRating(event.target.value); handleFormChange(); }}>
                                 <option value={0}>Select rating...</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -178,8 +189,8 @@ export default function UserRatings() {
                                 <option value={5}>5</option>
                             </select>
 
-                            <label>Interior:</label>
-                            <select value={interiorRating} onChange={(event) => { setInteriorRating(event.target.value); handleFormChange(); }}>
+                            <p><label>Safety: </label>A rating of 1 means that you feel very unsafe in your housing unit and surrounding area, while a rating of 5 means that you feel very safe.</p>
+                            <select id="safetyRating" value={safetyRating} onChange={(event) => { setSafetyRating(event.target.value); handleFormChange(); }}>
                                 <option value={0}>Select rating...</option>
                                 <option value={1}>1</option>
                                 <option value={2}>2</option>
@@ -187,18 +198,8 @@ export default function UserRatings() {
                                 <option value={4}>4</option>
                                 <option value={5}>5</option>
                             </select>
-                            <label>Safety:</label>
-                            <select value={safetyRating} onChange={(event) => { setSafetyRating(event.target.value); handleFormChange(); }}>
-                                <option value={0}>Select rating...</option>
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>
-                            </select>
-
-                            <label>Comment:</label>
-                            <textarea value={comment} onChange={(event) => { setComment(event.target.value); handleFormChange(); }}></textarea>
+                            <label htmlFor="comment">Comment: <span>Please share your thoughts on your stay, including any feedback or suggestions you may have.</span></label>
+                            <textarea id="comment" value={comment} onChange={(event) => { setComment(event.target.value); handleFormChange(); }}></textarea>
 
                             <button onClick={handlePopupSubmit}>Submit</button>
                             <button className="popupCancelButton" onClick={() => setShowPopup(false)}>Cancel</button>
@@ -206,7 +207,6 @@ export default function UserRatings() {
 
                         </div>
                     </div>
-
                 )}
 
                 {comments.map((comment, index) => (

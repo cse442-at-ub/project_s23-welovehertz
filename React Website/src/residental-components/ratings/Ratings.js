@@ -4,9 +4,12 @@ import "./ratings.css";
 const MAX_VALUE = 5;
 
 export default function Ratings(props) {
-    const ratings = Object.entries(props.rating).map(([type, value]) => {
-    const progressPercentage = (value / MAX_VALUE) * 100;
+  const ratings = Object.entries(props.rating).map(([type, value]) => {
+    const formattedValue = Number.isInteger(value) ? value : value.toFixed(1);
+    const progressPercentage = (formattedValue / MAX_VALUE) * 100;
     const progressClass = progressPercentage === 0 ? "empty" : "";
+    
+
 
     return (
       <div className="ratings-column" key={type}>
@@ -20,7 +23,7 @@ export default function Ratings(props) {
             style={{ width: `${progressPercentage}%` }}
           ></div>
         </div>
-        <span className="ratings-number">{value}</span>
+        <span className="ratings-number">{formattedValue}</span>
       </div>
     );
   });
