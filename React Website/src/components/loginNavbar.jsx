@@ -2,12 +2,12 @@ import React, {useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
 import "../styles/loginNavbar.css";
 import HomeLogo from '../pictures/home_logo.jpg'
-//import HomeIcon from '@mui/icons-material/Home';
 import ReorderIcon from '@mui/icons-material/Reorder';
 import SearchBar from "./searchbar";
 import HousingData from "../Data.json"
 import { Button } from "@mui/material";
 import Axios from "axios"
+import Logout from "../pages/logout";
 import Profile from "../pages/profilePage"
 
 export default function Navbar(){
@@ -51,7 +51,9 @@ export default function Navbar(){
                 </div>
                 <div className="rightSide">
                         <Link to="/CSE442-542/2023-Spring/cse-442h/">Home</Link>
-                        <span className="logout">Logout</span>
+                        <Logout>
+                            <span>Logout</span>
+                        </Logout>
                         <Link to="/CSE442-542/2023-Spring/cse-442h/contact-us">Contact Us</Link>
                         <Link to="/CSE442-542/2023-Spring/cse-442h/profile">
                             <img className="profile-image" src={pfp} />
