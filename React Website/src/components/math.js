@@ -9,6 +9,9 @@ export default function AverageRating(props){
         temp.push(parseInt(props[i]["Location"]))
         temp.push(parseInt(props[i]["Price"]))
         temp.push(parseInt(props[i]["Safety"]))
+        if (parseInt(props[i]["OverallRating"]) != 0){
+            temp.push(parseInt(props[i]["OverallRating"]))
+        }
         const total = temp.reduce((acc, c) => acc + c, 0);
         var s =  total / temp.length;
         Ratings.push(s)

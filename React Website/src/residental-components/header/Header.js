@@ -6,21 +6,21 @@ import slideshowThree from "./images/header-slideshow-image3.png"
 import "./header.css"
 import {useParams, useNavigate} from 'react-router-dom'
 import Axios from "axios"
-import StarRating from "../../components/starrating";
 
 export default function Header( props ) {
     const [isFavorite, setIsFavorite] = useState();
     const navigate = useNavigate();
 
+
     let { id } = useParams();
 
     //
     useEffect(() => {
-        let cookie = document.cookie
-        let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
+        let cookie = document.cookie;
+        let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18);
         if (!(parsedCookie.indexOf(";") == -1)) {
             parsedCookie = parsedCookie.substring(0, parsedCookie.indexOf(";"))
-        }
+        };
         Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/unfavorite.php', {
             id: id,
             pid: parsedCookie,
@@ -56,10 +56,11 @@ export default function Header( props ) {
     const price = prices.map(([key,value]) =>
         <ul key={key}>{key} : ${value.slice(0,value.length-3)+ ","+ value.slice(value.length-3)}</ul>
     )
+    // console.log(price)
+    //fixed bug
     return (
         <div className="header">
             <h1 className="header-title">{props.title}</h1>
-            <div className="starRating"><StarRating/></div>
             <button className="header-button" onClick={() => handleSubmission(4)}>{isFavorite ? "Unfavorite" : "Favorite"}</button>
             <div className="header-description">
                 <img className="header-rating-img" src={ratingStarImg} alt=""/>

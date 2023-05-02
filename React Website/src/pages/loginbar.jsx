@@ -17,7 +17,6 @@ export default function Login (props) {
         event.preventDefault();
 
         Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/login.php', {
-            
             email: email,
             password: password,
         })

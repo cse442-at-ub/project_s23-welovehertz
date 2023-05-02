@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect ,useState } from "react";
 import axios from "axios";
 import '../styles/starRatings.css';
 import {useParams} from 'react-router-dom';
@@ -26,13 +26,10 @@ export default function StarRating () {
         }else {
             return
         }
-        setRating(idx)
         axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/starrating.php', {
             userid:user,
             id:id, 
-            rating:rating
-        }).then(function (response){
-            return
+            rating:idx
         })
     }
     return (

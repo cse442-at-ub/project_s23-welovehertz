@@ -10,6 +10,7 @@ import ResiAmenities from '../components/hasamenities'
 import ResiRatings from '../components/ratings'
 import '../styles/resident-page.css'
 import AverageRating from '../components/math'
+import StarRating from '../components/starrating'
 
 
 export default function ResidentPage() {
