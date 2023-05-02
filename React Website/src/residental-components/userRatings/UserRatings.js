@@ -193,7 +193,7 @@ export default function UserRatings() {
                         </div>
                     )}
 
-                    {comments.map((comment, index) => (
+                    {comments.map((comment) => (
                         <div className="userRatings-column">
                             <div className="userRatings-topRow">
                                 <img className="userRatings-pfp" src={pfp} alt="pfp" />
@@ -210,6 +210,30 @@ export default function UserRatings() {
                 </div>
             </div>
         )
+    } else {
+        {
+            return (
+                <>
+                    <div className="commentSection">
+                        <h1>Leave a Comment</h1>
+                        {comments.map((comment) => (
+                            <div className="userRatings-column">
+                                <div className="userRatings-topRow">
+                                    <img className="userRatings-pfp" src={pfp} alt="pfp" />
+                                    <h3 className="userRatings-name">{comment.name}</h3>
+                                    <img className="userRatings-like-button" src={likeButton} alt="pfp" />
+                                    <span className="userRatings-like-number">{comment.likes}</span>
+                                    <img className="userRatings-dislike-button" src={dislikeButton} alt="pfp" />
+                                    <span className="userRatings-dislike-number">{comment.dislikes}</span>
+                                </div>
+                                <div className="userRatings-date">{comment.Date.substring(1)}</div>
+                                <p className="userRatings-description">{comment.comment}</p>
+                            </div>
+                        ))}
+                    </div>
+                </>
+            )
+        }
     }
 }
 
