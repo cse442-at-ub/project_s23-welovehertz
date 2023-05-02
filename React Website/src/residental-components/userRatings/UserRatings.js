@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom'
-
+import ResiComment from '../../components/comment'
 import pfp from "./images/UserRatings-profile-icon.png"
 import likeButton from "./images/UserRatings-like-button.png"
 import dislikeButton from "./images/UserRatings-dislike-button.png"
@@ -20,6 +20,8 @@ export default function UserRatings() {
     const [locationRating, setLocationRating] = useState(0);
     const [interiorRating, setInteriorRating] = useState(0);
     const [safetyRating, setSafetyRating] = useState(0);
+    const [currentDate, setCurrentDate] = useState("");
+
     const navigate = useNavigate();
     let { id } = useParams();
     const handleFormChange = () => {
@@ -37,7 +39,23 @@ export default function UserRatings() {
             setFormIncomplete(true);
         }
     };
-
+    useEffect(() => {
+        Axios.get('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/date.php')
+            .then(response => {
+                const date = response.data.substring(1)
+                setCurrentDate(date);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/comment.php', {
+            id: id
+        }).then(function (response) {
+            const data = JSON.parse(response.data.substring(1, response.data.length - 1))
+            setComments(data)
+            console.log(data)
+        })
+    }, []);
 
     const handlePopupSubmit = (event) => {
         console.log(id)
@@ -70,7 +88,7 @@ export default function UserRatings() {
             return;
         } else {
             Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/rating.php', {
-                data, userid: parsedCookie, pageid: id
+                data, userid: parsedCookie, pageid: id, currentDate
             })
                 .then((response) => {
                     setShowPopup(false);
@@ -86,52 +104,9 @@ export default function UserRatings() {
 
     return (
         <div className="userRatings">
-            <div className="userRatings-row">
-                <div className="userRatings-column">
-                    <div className="userRatings-topRow">
-                        <img className="userRatings-pfp" src={pfp} alt="pfp" />
-                        <h3 className="userRatings-name">Anonymous</h3>
-                        <img className="userRatings-like-button" src={likeButton} alt="pfp" />
-                        <span className="userRatings-like-number">26</span>
-                        <img className="userRatings-dislike-button" src={dislikeButton} alt="pfp" />
-                        <span className="userRatings-dislike-number">2</span>
-                    </div>
-                    <div className="userRatings-date">Apr 19th, 2011</div>
-                    <p className="userRatings-description">This is the best off campus housing. The kitchen looks so nice and the living room is huge.</p>
-                </div>
-                <div className="userRatings-column">
-                    <div className="userRatings-topRow">
-                        <img className="userRatings-pfp" src={pfp} alt="pfp" />
-                        <h3 className="userRatings-name">Samuel</h3>
-                        <img className="userRatings-like-button" src={likeButton} alt="pfp" />
-                        <span className="userRatings-like-number">0</span>
-                        <img className="userRatings-dislike-button" src={dislikeButton} alt="pfp" />
-                        <span className="userRatings-dislike-number">0</span>
-                    </div>
-                    <div className="userRatings-date">Apr 19th, 2011</div>
-                    <p className="userRatings-description">This is the best off campus housing. The kitchen looks so nice and the living room is huge.</p>
-                </div>
-            </div>
-            <div className="userRatings-row">
-                <div className="userRatings-column">
-                    <div className="userRatings-topRow">
-                        <img className="userRatings-pfp" src={pfp} alt="pfp" />
-                        <h3 className="userRatings-name">Mathew Yeung</h3>
-                        <img className="userRatings-like-button" src={likeButton} alt="pfp" />
-                        <span className="userRatings-like-number">0</span>
-                        <img className="userRatings-dislike-button" src={dislikeButton} alt="pfp" />
-                        <span className="userRatings-dislike-number">100</span>
-                    </div>
-                    <div className="userRatings-date">Apr 19th, 2011</div>
-                    <p className="userRatings-description">This is the best off campus housing. The kitchen looks so nice and the living room is huge.</p>
-                </div>
-                <div className="userRatings-column"></div>
-            </div>
             <div className="commentSection">
                 <h1>Leave a Comment</h1>
-                {comments.map((comment, index) => (
-                    <div key={index} className="comment">{comment}</div>
-                ))}
+
 
                 <button className="popupButton" onClick={() => setShowPopup(true)}>Leave a Rating</button>
 
@@ -210,8 +185,17 @@ export default function UserRatings() {
                 )}
 
                 {comments.map((comment, index) => (
-                    <div key={index} className="comment">
-                        <p>{comment}</p>
+                    <div className="userRatings-column">
+                        <div className="userRatings-topRow">
+                            <img className="userRatings-pfp" src={pfp} alt="pfp" />
+                            <h3 className="userRatings-name">{comment.name}</h3>
+                            <img className="userRatings-like-button" src={likeButton} alt="pfp" />
+                            <span className="userRatings-like-number">{comment.likes}</span>
+                            <img className="userRatings-dislike-button" src={dislikeButton} alt="pfp" />
+                            <span className="userRatings-dislike-number">{comment.dislikes}</span>
+                        </div>
+                        <div className="userRatings-date">{comment.Date.substring(1)}</div>
+                        <p className="userRatings-description">{comment.comment}</p>
                     </div>
                 ))}
             </div>

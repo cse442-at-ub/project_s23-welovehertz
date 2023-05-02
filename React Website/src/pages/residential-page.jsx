@@ -19,7 +19,7 @@ export default function ResidentPage() {
     const [amenities, setAmenities] = useState('');
     const [rating, setRatings] = useState('');
     const [complexRating, setComplexRating] = useState('')
-
+    const [comment, setComment] = useState('')
     const navigate = useNavigate();
 
     let { id } = useParams();
@@ -42,7 +42,6 @@ export default function ResidentPage() {
     // username = readCookie('currentUserCookie')
 
     useEffect(() => {
-        console.log(id)
         if (id < 1 || id > 11 || isNaN(id)){
             navigate(`/CSE442-542/2023-Spring/cse-442h/contact-us`)
         }
@@ -54,7 +53,7 @@ export default function ResidentPage() {
             setComplexRating(AverageRating(data))
             setRatings(ResiRatings(data))
         })
-
+        
         Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/residential.php', {
             id: id
         })
@@ -69,7 +68,7 @@ export default function ResidentPage() {
 
     return (
         <div className='container'>
-            <Header prices={prices} title={title} location={location}/>
+            <Header prices={prices} title={title} location={location} rating={complexRating}/>
             <hr />
             <Amenities amenities={amenities}/>
             <hr />
