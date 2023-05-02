@@ -19,13 +19,17 @@ export default function StarRating () {
         }
         return null;
     }
-
-    const handleClick = (idx) => {
+    
+    useEffect(() => {
         if (document.cookie.includes("currentUserCookie")) {
             setUser(readCookie('currentUserCookie'))
         }else {
             return
         }
+    }, [])
+
+    const handleClick = (idx) => {
+        setRating(idx);
         axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/starrating.php', {
             userid:user,
             id:id, 
