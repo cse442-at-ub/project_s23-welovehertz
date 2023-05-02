@@ -7,8 +7,7 @@ import SearchBar from "./searchbar";
 import HousingData from "../Data.json"
 import { Button } from "@mui/material";
 import Axios from "axios"
-import Logout from "../pages/logout";
-import Profile from "../pages/profilePage"
+
 
 export default function Navbar(){
 
@@ -29,7 +28,10 @@ export default function Navbar(){
             setPfp(parsedPFP)
         })     
     })
-    
+    function deleteCookie(){
+        document.cookie = "currentUserCookie=; expires = 01 Jan 2000 00:00:00 UTC; path=/;"
+        window.location.reload();
+    }
     const toggleNavbar = () => {
         setOpenLinks(!openLinks)
     };
@@ -51,9 +53,7 @@ export default function Navbar(){
                 </div>
                 <div className="rightSide">
                         <Link to="/CSE442-542/2023-Spring/cse-442h/">Home</Link>
-                        <Logout>
-                            <span>Logout</span>
-                        </Logout>
+                        <Link to="/CSE442-542/2023-Spring/cse-442h/login" onClick={deleteCookie}>Logout</Link>
                         <Link to="/CSE442-542/2023-Spring/cse-442h/contact-us">Contact Us</Link>
                         <Link to="/CSE442-542/2023-Spring/cse-442h/profile">
                             <img className="profile-image" src={pfp} />
