@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom'
+import StarRating from "../../components/starrating";
 import ResiComment from '../../components/comment'
 import pfp from "./images/UserRatings-profile-icon.png"
 import likeButton from "./images/UserRatings-like-button.png"
 import dislikeButton from "./images/UserRatings-dislike-button.png"
 import Axios from "axios"
 import "./userRatings.css"
-import "./popup.css"
 
 export default function UserRatings() {
     const [showIncompleteFormError, setShowIncompleteFormError] = useState(false);
@@ -24,6 +24,15 @@ export default function UserRatings() {
 
     const navigate = useNavigate();
     let { id } = useParams();
+    const [isLoggedin, setIsLoggedin] = useState(false);
+
+    useEffect(() => {
+      const cookie = document.cookie
+      if (cookie.includes("currentUserCookie")) {
+        setIsLoggedin(true)
+      }
+    }, [])
+
     const handleFormChange = () => {
         if (
             cleanlinessRating !== 0 &&
@@ -101,8 +110,7 @@ export default function UserRatings() {
                 });
         }
     };
-
-    return (
+    if(isLoggedin){return (
         <div className="userRatings">
             <div className="commentSection">
                 <h1>Leave a Comment</h1>
@@ -200,6 +208,9 @@ export default function UserRatings() {
                 ))}
             </div>
         </div>
-    )
+    )}
+    
+
+    
 }
 

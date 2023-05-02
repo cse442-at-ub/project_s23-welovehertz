@@ -1,0 +1,14 @@
+.starRating button {
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .on {
+    color: #ffc928;
+  }
+  .off {
+    color: #ccc;
+  }
+  

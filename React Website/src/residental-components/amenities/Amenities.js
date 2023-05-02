@@ -8,7 +8,7 @@ import "./amenities.css"
 export default function Amenities(props) {
     var amenities = Object.keys(props.amenities);
     // console.log(amenities)
-    const amenity = amenities.map((key) =>
+    const amenity = amenities.map((key, a) =>
         <> 
         <ul className="amenities-type" key={key}>{key}</ul>
         <img className="amenities-icon" src={require("./images/"+key.toLowerCase()+".png")} alt={key}/>

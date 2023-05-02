@@ -10,6 +10,7 @@ import ResiAmenities from '../components/hasamenities'
 import ResiRatings from '../components/ratings'
 import '../styles/resident-page.css'
 import AverageRating from '../components/math'
+import StarRating from '../components/starrating'
 
 
 export default function ResidentPage() {
@@ -23,23 +24,6 @@ export default function ResidentPage() {
     const navigate = useNavigate();
 
     let { id } = useParams();
-
-    // const cookie = document.cookie
-    // if (cookie.includes("currentUserCookie")) {
-      
-    // }
-    // function readCookie(n) {
-    //     var cookieName = n + "=";
-    //     var split = document.cookie.split(';');
-    //     for(var i=0;i < split.length;i++) {
-    //         var c = split[i];
-    //         while (c.charAt(0)==' ') c = c.substring(1,c.length);
-    //         if (c.indexOf(cookieName) == 0) return c.substring(cookieName.length,c.length);
-    //     }
-    //     return null;
-    // }
-    
-    // username = readCookie('currentUserCookie')
 
     useEffect(() => {
         if (id < 1 || id > 11 || isNaN(id)){
@@ -65,7 +49,7 @@ export default function ResidentPage() {
             setAmenities(ResiAmenities(residentialData))
         })
     }, []);
-
+    
     return (
         <div className='container'>
             <Header prices={prices} title={title} location={location} rating={complexRating}/>
