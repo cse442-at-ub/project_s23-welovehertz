@@ -7,6 +7,7 @@ import likeButton from "./images/UserRatings-like-button.png"
 import dislikeButton from "./images/UserRatings-dislike-button.png"
 import Axios from "axios"
 import "./userRatings.css"
+import "./popup.css"
 
 export default function UserRatings() {
     const [showIncompleteFormError, setShowIncompleteFormError] = useState(false);
