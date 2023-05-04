@@ -11,11 +11,11 @@ switch ($method) {
     case "POST":
         $data = json_decode(file_get_contents('php://input'));
         $residenceComplexID = $data->id;
-        $sql = "SELECT * FROM `User Ratings` WHERE `Residence Rated` = $residenceComplexID";
+        $userID = $data->userid;
+        $rating = $data->rating;
+        $sql = "UPDATE `User Ratings` SET `OverallRating` = $rating WHERE `Residence Rated` = $residenceComplexID AND `User` = $userID";
         $param = $conn->prepare($sql);
         $param->execute();
-        $resi = $param->fetchAll(PDO:: FETCH_ASSOC);
-        echo json_encode($resi);
 }
 
 

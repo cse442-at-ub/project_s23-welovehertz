@@ -14,16 +14,17 @@ export default function Header( props ) {
     const [image, setImage] = useState([])
     const navigate = useNavigate();
 
+
     let { id } = useParams();
 
 
 
     useEffect(() => {
-        let cookie = document.cookie
-        let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
+        let cookie = document.cookie;
+        let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18);
         if (!(parsedCookie.indexOf(";") == -1)) {
             parsedCookie = parsedCookie.substring(0, parsedCookie.indexOf(";"))
-        }
+        };
         Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/unfavorite.php', {
             id: id,
             image: image,

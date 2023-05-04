@@ -10,7 +10,7 @@ import HousingData from "../Data.json"
 export default function Navbar(){
 
     const [openLinks, setOpenLinks] = useState(false);
-
+    
     const toggleNavbar = () => {
         setOpenLinks(!openLinks)
     };

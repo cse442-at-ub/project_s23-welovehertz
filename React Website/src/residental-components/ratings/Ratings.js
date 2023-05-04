@@ -10,7 +10,6 @@ export default function Ratings(props) {
     const progressClass = progressPercentage === 0 ? "empty" : "";
     
 
-
     return (
       <div className="ratings-column" key={type}>
         <span className="ratings-type">{type}</span>
