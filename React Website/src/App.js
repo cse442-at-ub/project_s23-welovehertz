@@ -10,20 +10,23 @@ import './App.css';
 import ResidentPage from './pages/residential-page';
 import ContactUs from './pages/contact';
 import ProfilePage from './pages/profilePage';
+import ErrorPage from './pages/errorPage';
 
 function App() {  
   const [isLoggedin, setIsLoggedin] = useState(false);
-
+  
   useEffect(() => {
     const cookie = document.cookie
     if (cookie.includes("currentUserCookie")) {
       setIsLoggedin(true)
+
     }
   }, [])
 
   const handleLogin = () => {
     setIsLoggedin(true);
   }
+
 
   return (
     <>
@@ -35,7 +38,7 @@ function App() {
             <Route path='/CSE442-542/2023-Spring/cse-442h/register' element={<Box />} />
             <Route path='/CSE442-542/2023-Spring/cse-442h/:id' element={<ResidentPage/>} />
             <Route path='/CSE442-542/2023-Spring/cse-442h/contact-us' element={<ContactUs/>} />
-            <Route path='/CSE442-542/2023-Spring/cse-442h/profile' element={<ProfilePage/>} />
+            {isLoggedin ? <Route path='/CSE442-542/2023-Spring/cse-442h/profile' element={<ProfilePage/>} /> : <Route path='/CSE442-542/2023-Spring/cse-442h/contact-us' element={<ContactUs/>} />}
           </Routes>
           <Footer />
       </Router>
