@@ -55,6 +55,7 @@ export default function UserRatings() {
         if (!(parsedCookie.indexOf(";") == -1)) {
             parsedCookie = parsedCookie.substring(0, parsedCookie.indexOf(";"))
         }
+        
         const data = {
             cleanlinessRating: cleanlinessRating,
             priceRating: priceRating,
