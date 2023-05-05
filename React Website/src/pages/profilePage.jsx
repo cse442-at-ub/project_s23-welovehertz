@@ -1,9 +1,7 @@
 import '../styles/profile.css';
-import pfpTemp from '../pictures/pfp.png';
 import React, {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
-import LoginNavbar from '../components/loginNavbar';
 
 //This is the User Profile Page
 export default function ProfilePage () {
@@ -16,9 +14,13 @@ export default function ProfilePage () {
     const [isValidPassword, setIsValidPassword] = useState(false);
     const [pfp, setPfp] = useState();
     const [isValidPic, setIsValidPic] = useState(false);
+    const navigateProfile = useNavigate();
 
     useEffect(() => {
         let cookie = document.cookie
+        if (!cookie.includes("currentUserCookie")) {
+            navigateProfile(`/CSE442-542/2023-Spring/cse-442h/error`)
+        }
         let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
         if (!(parsedCookie.indexOf(";") == -1)) {
             parsedCookie = parsedCookie.substring(0, parsedCookie.indexOf(";"))
@@ -96,7 +98,7 @@ export default function ProfilePage () {
             <h1 className="profile-header">Profile Page</h1>
             <img className="profile-pfp" src={pfp} alt="pfp" />
             <div>
-                <input onChange={(event) => setPfp(URL.createObjectURL(event.target.files[0]))} type="file" name="image" accept=".jpg, .jpeg, .png" />
+                <input onChange={(event) => console.log(event.target.files)} type="file" name="image" accept=".jpg, .jpeg, .png" />
                 <button className="profile-cp-button" onClick={() => updatePFP()}>Update Profile Picture</button>
             </div>
             {isValidPic && <div className="error-message">You did not upload a png, jpg, or jpeg file</div>}
