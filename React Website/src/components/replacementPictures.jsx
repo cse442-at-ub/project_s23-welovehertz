@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import ratingStarImg from "./images/header-rating-star.png";
+import slideshowOne from "./images/header-slideshow-image1.png"
+import slideshowTwo from "./images/header-slideshow-image2.png"
+import slideshowThree from "./images/header-slideshow-image3.png"
 import "./header.css"
 import { useParams, useNavigate } from 'react-router-dom'
 import Axios from "axios"
-import EllicottOne from './resident-hall-photos/Ellicott/EllicottBedroom.jpg'
-import EllicottTwo from './resident-hall-photos/Ellicott/EllicottKitchen.jpg'
-import EllicottThree from './resident-hall-photos/Ellicott/EllicottBathroom.jpg'
-import GovenorsOne from './resident-hall-photos/Governors/GovernorsBathroom.jpg'
-import GovernorsTwo from './resident-hall-photos/Governors/GovernorsBed.jpg'
-import GovernorsThree from './resident-hall-photos/Governors/GovernorsSS.jpg'
-import HadleyOne from './resident-hall-photos/HadleyVillage/HadleyBathroom.jpg'
-import HadleyTwo from './resident-hall-photos/HadleyVillage/HadleyBedroom.jpg'
-import HadleyThree from './resident-hall-photos/HadleyVillage/HadleyLivingRoom.jpg'
-import CreaksideOne from './resident-hall-photos/CreaksideEast-West/CreaksideBed.jpg'
-import CreaksideTwo from './resident-hall-photos/CreaksideEast-West/CreaksideKitchen.jpg'
-import CreaksideThree from './resident-hall-photos/CreaksideEast-West/Room.jpg'
-import SouthlakeOne from './resident-hall-photos/SouthLake/SouthlakeBedroom.jpeg'
-import SouthlakeTwo from './resident-hall-photos/SouthLake/SouthlakeBathroom.jpeg'
-import SouthLakeThree from './resident-hall-photos/SouthLake/SouthlakeKitchen.jpeg'
- 
+import EllicottOne from "../../resident-hall-photos/Ellicott/EllicottBedroom.jpg";
+import EllicottTwo from "../../resident-hall-photos/Ellicott/EllicottKitchen.jpg";
+import EllicottThree from "../../resident-hall-photos/Ellicott/EllicottBathroom.jpg";
+import GovenorsOne from "../../public/resident-hall-photos/Governors/"
+import GovernorsTwo from "../../resident-hall-photos/Governors/"
+import GovernorsThree from "../../resident-hall-photos/Governors/GovernorsSS.jpg"
+import HadleyOne from "../resident-hall-photos/HadleyVillage/HadleyBathroom.jpg"
+import HadleyTwo from "../resident-hall-photos/HadleyVillage/HadleyBedroom.jpg"
+import HadleyThree from "../../resident-hall-photos/HadleyVillage/HadleyLivingRoom.jpg"
+import CreaksideOne from "../../resident-hall-photos/Creakside East-West/CreaksideBed.jpg"
+import CreaksideTwo from "../../resident-hall-photos/Creakside East-West/CreaksideKitchen.jpg"
+import CreaksideThree from "../../resident-hall-photos/Creakside East-West/CreaksideLiving.jpg"
+
 export default function Header(props) {
     const [isFavorite, setIsFavorite] = useState();
     const [headerData, setHeaderData] = useState();
@@ -29,24 +29,17 @@ export default function Header(props) {
     let { id } = useParams();
     const images1to5 = [EllicottOne, EllicottTwo, EllicottThree];
     const image6 = [HadleyOne, HadleyTwo, HadleyThree];
-    const image7 = [SouthlakeOne, SouthlakeTwo, SouthLakeThree]
     const image9 = [GovenorsOne, GovernorsTwo, GovernorsThree];
     const image10to11 = [CreaksideOne, CreaksideTwo, CreaksideThree]
 
     useEffect(() => {
-        console.log("CCCC")
-        if (id <= 5 || id == 8) { 
-            // Ellicott 
-            console.log("its in her")
+        if (id >= 1 && id <= 5 && id !== 8) { // Ellicott 
             setImage(images1to5);
-        } else if (id == 6 ) {// Hadley and South Lake
+        } else if (id >= 6 && id <= 7) { // Hadley and South Lake
             setImage(image6);
-            console.log("it go here")
-        }else if (id ==7){
-            setImage(image7)
-        } else if (id <= 9) { // Governers 
+        } else if (id === 9) { // Governers 
             setImage(image9);
-        } else if (id <= 11) { // Creakside 
+        } else if (id === 10 || id === 11) { // Creakside 
             setImage(image10to11);
         }
     }, [id]);
@@ -72,7 +65,7 @@ export default function Header(props) {
                     setIsFavorite(false)
                 }
             })
-    }, [id, image])
+    }, [])
 
     const handleSubmission = (event) => {
         let cookie = document.cookie
@@ -105,10 +98,10 @@ export default function Header(props) {
                 <span>{props.location}</span>
             </div>
             <div>
-            {image.map((img, index) => (
-                <img className={`header-img header-img-${index + 1} ${props.id === index+1 ? "active" : ""}`} src={img} alt={`slideshowImg${index + 1}`} key={index} />
-            ))}
-        </div>
+                <img className="header-img header-img-one" src={EllicottOne} alt="slideshowImg1" />
+                <img className="header-img" src={EllicottTwo} alt="slideshowImg2" />
+                <img className="header-img" src={EllicottThree} alt="slideshowImg3" />
+            </div>
             <div>
                 <h2 className="header-price-title">Dorming Options</h2>
                 <span className="header-price">{price}</span>
