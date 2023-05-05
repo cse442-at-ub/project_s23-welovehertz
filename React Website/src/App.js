@@ -18,7 +18,6 @@ function App() {
     const cookie = document.cookie
     if (cookie.includes("currentUserCookie")) {
       setIsLoggedin(true)
-
     }
   }, [])
 
@@ -37,7 +36,8 @@ function App() {
             <Route path='/CSE442-542/2023-Spring/cse-442h/register' element={<Box />} />
             <Route path='/CSE442-542/2023-Spring/cse-442h/:id' element={<ResidentPage/>} />
             <Route path='/CSE442-542/2023-Spring/cse-442h/contact-us' element={<ContactUs/>} />
-            {isLoggedin ? <Route path='/CSE442-542/2023-Spring/cse-442h/profile' element={<ProfilePage/>} /> : <Route path='/CSE442-542/2023-Spring/cse-442h/contact-us' element={<ContactUs/>} />}
+            <Route path='/CSE442-542/2023-Spring/cse-442h/profile' element={<ProfilePage/>} />
+            <Route path='/CSE442-542/2023-Spring/cse-442h/error' element={<ErrorPage/>} />
           </Routes>
           <Footer />
       </Router>

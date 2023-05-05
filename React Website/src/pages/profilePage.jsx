@@ -1,9 +1,7 @@
 import '../styles/profile.css';
-import pfpTemp from '../pictures/pfp.png';
 import React, {useEffect, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import Axios from 'axios';
-import LoginNavbar from '../components/loginNavbar';
 
 //This is the User Profile Page
 export default function ProfilePage () {
@@ -15,10 +13,13 @@ export default function ProfilePage () {
     //Makes sure the password length > 8
     const [isValidPassword, setIsValidPassword] = useState(false);
     const [pfp, setPfp] = useState();
-    const [isValidPic, setIsValidPic] = useState(false);
+    const navigateProfile = useNavigate();
 
     useEffect(() => {
         let cookie = document.cookie
+        if (!cookie.includes("currentUserCookie")) {
+            navigateProfile(`/CSE442-542/2023-Spring/cse-442h/error`)
+        }
         let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
         if (!(parsedCookie.indexOf(";") == -1)) {
             parsedCookie = parsedCookie.substring(0, parsedCookie.indexOf(";"))
@@ -32,7 +33,6 @@ export default function ProfilePage () {
             setLastName(profileData.last_name)
             setEmail(profileData.email)
             setPfp(profileData.pfp)
-            console.log(profileData.pfp)
             for (let i = 0; i < profileData.favorite_list.length; i++) {
                 if (profileData.favorite_list == "") { break; }
                 setFavoriteList(prevFavoriteList => [...prevFavoriteList, {
@@ -71,24 +71,19 @@ export default function ProfilePage () {
         })
     }
 
-    const updatePFP = () => {
-        if (pfp == undefined) {
-            setIsValidPic(true)
-        } else {
-            setIsValidPic(false)
-            let cookie = document.cookie
-            let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
-            if (!(parsedCookie.indexOf(";") == -1)) {
-                parsedCookie = parsedCookie.substring(0, parsedCookie.indexOf(";"))
-            }
-            Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/uploadPFP.php', {
-                id: parsedCookie,
-                pfp: pfp,
-            })
-            .then((response) => {
-                window.location.reload();
-            })
+    const updatePFP = (imageData) => {
+        let cookie = document.cookie
+        let parsedCookie = cookie.substring(cookie.indexOf("currentUserCookie") + 18)
+        if (!(parsedCookie.indexOf(";") == -1)) {
+            parsedCookie = parsedCookie.substring(0, parsedCookie.indexOf(";"))
         }
+        Axios.post('https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442h/backend/uploadPFP.php', {
+            id: parsedCookie,
+            pfp: pfp,
+        })
+        .then((response) => {
+            window.location.reload();
+        })
     }
 
     return (
@@ -99,7 +94,6 @@ export default function ProfilePage () {
                 <input onChange={(event) => setPfp(URL.createObjectURL(event.target.files[0]))} type="file" name="image" accept=".jpg, .jpeg, .png" />
                 <button className="profile-cp-button" onClick={() => updatePFP()}>Update Profile Picture</button>
             </div>
-            {isValidPic && <div className="error-message">You did not upload a png, jpg, or jpeg file</div>}
             <div className="profile-container-1">
                 <div className="profile-container-2">
                     <div className="profile-container-3">
