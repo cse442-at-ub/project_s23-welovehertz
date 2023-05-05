@@ -34,16 +34,19 @@ export default function Header(props) {
     const image10to11 = [CreaksideOne, CreaksideTwo, CreaksideThree]
 
     useEffect(() => {
-        if (id >= 1 || id <= 5 && id !== 8) { // Ellicott 
+        console.log("CCCC")
+        if (id <= 5 || id == 8) { 
+            // Ellicott 
+            console.log("its in her")
             setImage(images1to5);
-        } else if (id === 6 ) {// Hadley and South Lake
+        } else if (id == 6 ) {// Hadley and South Lake
             setImage(image6);
             console.log("it go here")
         }else if (id ==7){
             setImage(image7)
-        } else if (id === 9) { // Governers 
+        } else if (id <= 9) { // Governers 
             setImage(image9);
-        } else if (id === 10 || id === 11) { // Creakside 
+        } else if (id <= 11) { // Creakside 
             setImage(image10to11);
         }
     }, [id]);
