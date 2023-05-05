@@ -1,82 +1,88 @@
 .searchbar {
-    height: 80px;
-    margin-left: 20%;
-    width: 70%; /* changed from 300% */
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* added this property */
-  }
-  
-  .searchInputs {
-    margin-top: 25px;
-    width: 60%;
-    display: inline-flex;
-    height: 30px;
-    width: 100%;
-  }
-  
-  .searchInputs input {
-    background-color: white;
-    border: 0;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    font-size: 15px;
-    padding: 10px; /* reduce padding to make it shorter */
-    height: 20px; /* reduce height */
-    width: 300px; /* increase width */
-  }
-  
-  
-  .searchIcon {
-    height:40px;
-    width: 50px;
-    border: 0;
-    border-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    background-color: white;
-    display: grid;
-    place-items: center;
-  }
-  
-  input:focus {
-    outline: none;
-  }
-  
-  .searchIcon svg {
-    font-size: 35px;
-  } 
-  
-  .dataResults {
-    margin: 15px auto; /* changed margin property */
-    width: 330px;
-    height: 200px;
-    background-color:white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 11px; /* fixed box-shadow property */
-    overflow: auto;
-  }
-  
-  .dataResults::-webkit-scrollbar {
-    display: ruby-base;
-  }
-  
-  .dataResults .dataItem {
-    width: 85%;
-    display: flex;
-    align-items: left;
-    color: black;
-  }
+  height: 40px;
+  min-width: 270px;
+  max-width: 270px;
+  display: flex;
+  position: relative;
+}
 
-  
-  a {
-    text-decoration: none;
-  }
-  
-  a:hover {
-    background-color: lightgray;
-  }
-  
-  .clearBtn {
-    cursor: pointer;
-  }
-  
+.searchInputs {
+  width: 100%;
+  display: inline-flex;
+  height: 40px;
+  min-width: 200px;
+  max-width: 200px;
+  z-index: 2;
+
+}
+
+.searchInputs input {
+  background-color: white;
+  border: 0;
+  padding: 10px;
+  font-size: 15px;
+  height: 20px;
+  min-width: 200px;
+  max-width: 200px;
+}
+
+.searchInputs input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.searchIcon {
+  height: 40px;
+  min-width: 50px;
+  max-width: 50px;
+  border: 0;
+  border-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  background-color: white;
+  display: grid;
+  place-items: center;
+}
+
+input:focus {
+  outline: none;
+}
+
+.searchIcon svg {
+  font-size: 35px;
+}
+
+.dataResults {
+  position:absolute;
+  left:0;
+  top:40px;
+  min-width: 270px;
+  max-width: 270px;
+  height: 200px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 11px;
+  overflow: auto;
+  z-index: 2;
+}
+
+.dataResults::-webkit-scrollbar {
+  display: ruby-base;
+}
+
+.dataResults .dataItem {
+  display: flex;
+  align-items: left;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: lightgray;
+}
+
+.clearBtn {
+  cursor: pointer;
+}
