@@ -10,7 +10,6 @@ import './App.css';
 import ResidentPage from './pages/residential-page';
 import ContactUs from './pages/profilePage';
 import ProfilePage from './pages/profilePage';
-import ErrorPage from './pages/errorPage';
 
 function App() {  
   const [isLoggedin, setIsLoggedin] = useState(false);
