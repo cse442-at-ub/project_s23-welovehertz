@@ -25,7 +25,7 @@
     width: 45%;
     margin-bottom: 40px;
     margin-left: 50px;
-    height: 150px;
+    height: 100%;
 
 }
 
@@ -68,9 +68,9 @@
     margin-left: 80px;
 }
 
-.userRatings-comments {
+.userRatings-comment {
     margin-left: 30px;
-    width: 70%;
+    width: 80%;
 }
 
 p3 {
