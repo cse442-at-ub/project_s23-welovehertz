@@ -1,4 +1,26 @@
-.userRatings-column {
+.comments-title {
+    padding-left: 40px;
+    font-size: 40px;
+    display: block;
+}
+.popupButton {
+    background-color: #66b7dd;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    margin-left: 40px;
+    display: block;
+    margin-bottom: 20px;
+}
+.popupButton:hover{
+    background-color: #299cd1;
+}
+.userRatings-box {
     float: left;
     width: 45%;
     margin-bottom: 40px;
@@ -46,7 +68,7 @@
     margin-left: 80px;
 }
 
-.userRatings-description {
+.userRatings-comments {
     margin-left: 30px;
     width: 70%;
 }
@@ -55,5 +77,3 @@ p3 {
     text-align: center;
     color: red;
 }
-
-
