@@ -18,7 +18,7 @@ import CreaksideThree from './resident-hall-photos/CreaksideEast-West/Room.jpg'
 import SouthlakeOne from './resident-hall-photos/SouthLake/SouthlakeBedroom.jpeg'
 import SouthlakeTwo from './resident-hall-photos/SouthLake/SouthlakeBathroom.jpeg'
 import SouthLakeThree from './resident-hall-photos/SouthLake/SouthlakeKitchen.jpeg'
- 
+
 export default function Header(props) {
     const [isFavorite, setIsFavorite] = useState();
     const [headerData, setHeaderData] = useState();
@@ -35,14 +35,14 @@ export default function Header(props) {
 
     useEffect(() => {
         console.log("CCCC")
-        if (id <= 5 || id == 8) { 
+        if (id <= 5 || id == 8) {
             // Ellicott 
             console.log("its in her")
             setImage(images1to5);
-        } else if (id == 6 ) {// Hadley and South Lake
+        } else if (id == 6) {// Hadley and South Lake
             setImage(image6);
             console.log("it go here")
-        }else if (id ==7){
+        } else if (id == 7) {
             setImage(image7)
         } else if (id <= 9) { // Governers 
             setImage(image9);
@@ -104,11 +104,11 @@ export default function Header(props) {
                 <span className="header-rating">{props.rating}</span>
                 <span>{props.location}</span>
             </div>
-            <div>
-            {image.map((img, index) => (
-                <img className={`header-img header-img-${index + 1} ${props.id === index+1 ? "active" : ""}`} src={img} alt={`slideshowImg${index + 1}`} key={index} />
-            ))}
-        </div>
+            <div className="img-container">
+                {image.map((img, index) => (
+                    <img className={`header-img header-img-${index + 1} ${props.id === index + 1 ? "active" : ""}`} src={img} alt={`slideshowImg${index + 1}`} key={index} />
+                ))}
+            </div>
             <div>
                 <h2 className="header-price-title">Dorming Options</h2>
                 <span className="header-price">{price}</span>

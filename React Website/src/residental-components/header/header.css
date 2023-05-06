@@ -4,7 +4,11 @@
     padding-right: 10px;
     border-radius: 50px;
 }
-
+.img-container{
+    display:flex;
+    justify-content: center;
+    
+}
 .header-img-one {
     border-radius: 50px;
     margin-left: 40px;
