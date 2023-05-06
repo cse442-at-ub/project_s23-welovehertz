@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Link} from 'react-router-dom';
 import "../styles/navbar.css";
-import HomeLogo from '../pictures/home_logo.jpg'
+import HomeLogo from '../pictures/home_logo.svg'
 //import HomeIcon from '@mui/icons-material/Home';
 import ReorderIcon from '@mui/icons-material/Reorder';
 import { Button } from "@mui/material";
