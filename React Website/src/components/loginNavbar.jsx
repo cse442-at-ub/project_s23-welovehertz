@@ -1,7 +1,7 @@
 import React, {useState, useEffect } from "react";
 import {Link} from 'react-router-dom';
 import "../styles/loginNavbar.css";
-import HomeLogo from '../pictures/home_logo.jpg'
+import HomeLogo from '../pictures/home_logo.svg'
 import ReorderIcon from '@mui/icons-material/Reorder';
 import SearchBar from "./searchbar";
 import HousingData from "../Data.json"
