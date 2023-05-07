@@ -111,7 +111,7 @@ export default function UserRatings() {
                 });
         }
     };
-    if (!isLoggedin) {
+    if (isLoggedin) {
         return (
             <div className="userRatings">
                 <h2 className="comments-title">Comments</h2>
